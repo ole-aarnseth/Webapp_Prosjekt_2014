@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Prosjekt1.Models.Author>
+<ul class="dropdown-menu">
+    @foreach (var author in Model)
+    {
+        <li>@Html.ActionLink(author.FirstName + " " + author.LastName, "BrowseAuthor", new { fname = author.FirstName, lname = author.LastName })</li>
+    }
+</ul>

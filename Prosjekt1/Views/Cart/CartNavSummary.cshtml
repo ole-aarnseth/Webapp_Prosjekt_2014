@@ -1,0 +1,9 @@
+﻿@if ((int) ViewData["ItemCount"] == 0)
+{
+    <li><p class="navbar-text">Cart (0)</p></li>
+}
+
+else
+{
+    <li>@Html.ActionLink("Cart (" + ViewData["ItemCount"] + ")", "Index", "Cart", new { id = "cart-summary"})</li>
+}

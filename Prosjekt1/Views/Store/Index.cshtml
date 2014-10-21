@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Prosjekt1.Models.Book>
+@using Prosjekt1.Constants
+
+@{
+    ViewBag.Title = "Browse our books";
+}
+
+<h2>Browse our books</h2>
+<br/>
+
+@foreach (var book in Model)
+{
+    <a href="@Url.Action("BookDetails", new { bookId = book.BookId, fromContext = DetailsFromContext.FromIndex })" class="thumbnail bookviewbox">
+        <div class="bookviewinternal">
+            <img class="bookimg" alt="@book.Title" src="@book.BookImageURL" width="90" height="90">
+            <div class="bookviewtext">
+                <p class="book book-title">@book.Title</p>
+                <p class="book book-author">by @book.Author.FirstName @book.Author.LastName</p>
+                <p class="book book-desc">@book.Description</p>
+            </div>
+        </div>
+    </a><br/>
+}

@@ -1,0 +1,76 @@
+﻿@model Prosjekt1.Models.DBCustomer
+
+@{
+    ViewBag.Title = "Customer Details";
+}
+
+<h2>Customer Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label for="Email" class="control-label">Email:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            <label for="FirstName" class="control-label">First Name:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            <label for="LastName" class="control-label">Last Name:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            <label for="Phone" class="control-label">Phone Number:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            <label for="Address" class="control-label">Address:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            <label for="PostalCode" class="control-label">Postal Code:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+
+        <dt>
+            <label for="City" class="control-label">City:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+    </dl>
+</div>
+<a href="@Url.Action("EditCustomer")" class="btn btn-warning">Edit Your Details</a>
+<br />
+<br />
+<a href="@Url.Action("ListOrders", "Order")" class="btn btn-success">Order history</a>
+<br />
+<br />
+<a href="@Url.Action("Index", "Store")" class="btn btn-primary">Back to store</a>

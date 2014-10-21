@@ -1,0 +1,57 @@
+﻿@model Prosjekt1.Models.SignInCredentials
+
+@{
+    ViewBag.Title = "Sign In";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", ".signin-btn", function () {
+            var form = $(this).closest("form");
+            form.submit();
+        });
+    });
+</script>
+
+<h2>Sign In</h2>
+<br />
+<a href="@Url.Action("Register")">Register new customer</a>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="Email" class="control-label col-md-2">Email:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email", @maxlength = "40" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="LoginPassword" class="control-label col-md-2">Password:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LoginPassword, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                @Html.ValidationMessageFor(model => model.LoginPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="javascript:void(0)" class="signin-btn btn btn-default">Sign in</a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <p>@ViewBag.SignInFailed</p>
+            </div>
+        </div>
+    </div>
+}
+
+<a href="@Url.Action("Index", "Store")" class="btn btn-primary">Back</a>

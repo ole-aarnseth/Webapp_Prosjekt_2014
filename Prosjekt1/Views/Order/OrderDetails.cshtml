@@ -1,0 +1,88 @@
+﻿@model Prosjekt1.Models.Order
+
+@{
+    ViewBag.Title = "Order Details";
+}
+
+<h2>Order Details</h2>
+
+<div>
+    <br />
+    <h4>Order Id: @Model.OrderId; Order date: @Model.OrderDate</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Book.Title</td>
+                <td>@item.Book.Price</td>
+                <td>@item.ItemQuantity</td>
+            </tr>
+        }
+        <tr>
+            <td>Total</td>
+            <td>@Model.OrderTotal</td>
+            <td></td>
+        </tr>
+    </table>
+    <br />
+    <h4>Billing and postage address:</h4>
+    <hr />
+    <dl class="dl-horizontal-review">
+        <dt>
+            <label for="FullName" class="control-label">Full Name:</label>
+        </dt>
+
+        <dd>
+            @Model.Customer.FirstName @Model.Customer.LastName
+        </dd>
+
+        <dt>
+            <label for="Email" class="control-label">Email:</label>
+        </dt>
+
+        <dd>
+            @Model.Customer.Email
+        </dd>
+
+        <dt>
+            <label for="Phone" class="control-label">Phone Number:</label>
+        </dt>
+
+        <dd>
+            @Model.Customer.Phone
+        </dd>
+
+        <dt>
+            <label for="Address" class="control-label">Address:</label>
+        </dt>
+
+        <dd>
+            @Model.Customer.Address
+        </dd>
+
+        <dt>
+            <label for="PostalCode" class="control-label">Postal Code:</label>
+        </dt>
+
+        <dd>
+            @Model.Customer.PostalCode
+        </dd>
+
+        <dt>
+            <label for="City" class="control-label">City:</label>
+        </dt>
+
+        <dd>
+            @Model.Customer.City
+        </dd>
+
+    </dl>
+</div>
+<br />
+<a href="@Url.Action("ListOrders")" class="btn btn-primary">Back to order history</a>

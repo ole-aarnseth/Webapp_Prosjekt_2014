@@ -1,0 +1,11 @@
+﻿
+@if ((bool)ViewData["IsSignedIn"])
+{
+    <li>@Html.ActionLink("Signed in as '" + ViewData["Email"] + "'", "CustomerDetails", "Customer")</li>
+    <li>@Html.ActionLink("Sign out", "SignOut", "Customer")</li>
+}
+
+else
+{
+    <li>@Html.ActionLink("Sign In", "SignIn", "Customer")</li>
+}

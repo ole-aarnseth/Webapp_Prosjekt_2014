@@ -1,0 +1,64 @@
+﻿@model Prosjekt1.Models.Book
+@using Prosjekt1.Constants
+
+@{
+    ViewBag.Title = "Book Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Model.Title</h4>
+    <br/>
+    <img class="detailsimg" alt="@Model.Title" src="@Model.BookImageURL" width="128" height="128">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price),-
+        </dd>
+
+    </dl>
+</div>
+
+    <a href="@Url.Action("AddToCart", "Cart", new { bookId = Model.BookId })" class="btn btn-success cartbtn">Add to cart</a>
+    <br />
+
+    @if (ViewBag.FromContext == @DetailsFromContext.FromBrowseAuthor)
+    {
+        <a href="@Url.Action("BrowseAuthor", new { fname = ViewBag.FirstName, lname = ViewBag.LastName })" class="btn btn-primary backbtn">Back</a>
+    }
+
+    else if (ViewBag.FromContext == @DetailsFromContext.FromBrowseGenre)
+    {
+        <a href="@Url.Action("BrowseGenre", new { name = ViewBag.GenreName } )" class="btn btn-primary backbtn">Back</a>
+    }
+
+    else if (ViewBag.FromContext == @DetailsFromContext.FromCartIndex)
+    {
+        <a href="@Url.Action("Index", "Cart")" class="btn btn-primary backbtn">Back</a>
+    }
+
+    else
+    {
+        <a href="@Url.Action("Index")" class="btn btn-primary backbtn">Back</a>
+    }

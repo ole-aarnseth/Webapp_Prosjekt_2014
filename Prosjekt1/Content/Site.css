@@ -1,0 +1,104 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+p.book {
+    font-family: 'Microsoft Sans Serif';
+    color: black;
+}
+
+p.book-title {
+    font-size: 20px;
+}
+
+p.book-author {
+    font-style: italic;
+}
+
+p.book-desc {
+    width: 55em;
+}
+
+.bookviewtext {
+    float: left;
+    width: 55em;
+}
+
+img.bookimg {
+    float: left;
+    margin-right: 1em;
+}
+
+a.bookviewbox {
+    margin-top: 15px;
+    height: 10em;
+    width: 70em;
+    position: relative;
+    display: table;
+}
+
+.bookviewinternal {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+img.detailsimg {
+    margin-left: 5em;
+}
+
+a.cartbtn {
+    margin-top: 0.5em;
+    margin-left: 5em;
+}
+
+a.backbtn {
+    margin-top: 1.5em;
+    margin-left: 5em;
+}
+
+h4.addresshdr {
+    margin-left: 12em;
+    margin-bottom : 1em;
+}
+
+@media (min-width: 768px) {
+  .dl-horizontal-review dt {
+    float: left;
+    width: 9em;
+    overflow: hidden;
+    clear: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dl-horizontal-review dd:before,
+  .dl-horizontal-review dd:after {
+    display: table;
+    content: " ";
+  }
+  .dl-horizontal-review dd:after {
+    clear: both;
+  }
+  .dl-horizontal-review dd:before,
+  .dl-horizontal-review dd:after {
+    display: table;
+    content: " ";
+  }
+  .dl-horizontal-review dd:after {
+    clear: both;
+  }
+}

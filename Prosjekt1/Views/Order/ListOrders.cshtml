@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Prosjekt1.Models.Order>
+
+@{
+    ViewBag.Title = "Order history";
+}
+
+<h2>Order history</h2>
+
+<div>
+    <h4>Your orders:</h4>
+    <hr />
+    <ul>
+        @foreach (var order in Model)
+        {
+            <li>
+                @Html.ActionLink("Order Id: " + order.OrderId + ";  OrderDate: " + order.OrderDate.ToString(), "OrderDetails", new { OrderId = order.OrderId })
+            </li>
+        }
+    </ul>
+</div>
+<br />
+<br />
+<a href="@Url.Action("CustomerDetails", "Customer")" class="btn btn-primary">Back to your customer details</a>
+

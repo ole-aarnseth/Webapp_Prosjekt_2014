@@ -1,0 +1,22 @@
+﻿@model Prosjekt1.Models.Author
+@using Prosjekt1.Constants
+
+@{
+    ViewBag.Title = "Browse books by " + @Model.FirstName + " " + @Model.LastName;
+}
+
+<h2>Browse books by @Model.FirstName @Model.LastName</h2>
+<br />
+
+@foreach (var book in Model.Books)
+{
+    <a href="@Url.Action("BookDetails", new { bookId = book.BookId, fromContext = DetailsFromContext.FromBrowseAuthor })" class="thumbnail bookviewbox">
+        <div class="bookviewinternal">
+            <img class="bookimg" alt="@book.Title" src="@book.BookImageURL" width="90" height="90">
+            <div class="bookviewtext">
+                <p class="book book-title">@book.Title</p>
+                <p class="book book-desc">@book.Description</p>
+            </div>
+        </div>
+    </a><br />
+}
