@@ -8,7 +8,7 @@
  * Dette er kontrollobjektet for handlevognen vår, den legger til bøker og fjerner via kall til "ShoppingCart"-modellen,
  * i tilegg til en PartialView på navbaren som gir en oppsummering av handlevognens innhold.
  * 
- *    
+ *
  * 
  * 
 */
