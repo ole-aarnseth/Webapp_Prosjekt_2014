@@ -51,6 +51,9 @@
     <Compile Include="AdminDAL.cs" />
     <Compile Include="AdminDB.cs" />
     <Compile Include="AdminDBSeed.cs" />
+    <Compile Include="AdminRepository.cs" />
+    <Compile Include="InAdminRepository.cs" />
+    <Compile Include="AdminRepositoryStub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
