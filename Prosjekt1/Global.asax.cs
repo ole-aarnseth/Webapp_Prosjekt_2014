@@ -12,7 +12,10 @@ namespace Prosjekt1
     {
         protected void Application_Start()
         {
+            // Seed BookStoreDB
             System.Data.Entity.Database.SetInitializer(new Prosjekt1.Models.DBSeed());
+
+            // Seed AdminDB
             AdminBLL AdminBLL = new AdminBLL();
             AdminBLL.SeedAdminDB();
 

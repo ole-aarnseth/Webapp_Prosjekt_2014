@@ -8,7 +8,7 @@ namespace DAL
 {
     public class AdminDAL
     {
-        // Because DAL has no access to the original hash function in DBCustomer, it needs its own implementation.
+        // Because DAL has no access to the original hash function in Prosjekt1/Models/DBCustomer, it needs its own implementation.
         public static byte[] GeneratePasswordHash(string Password)
         {
             var algorithm = System.Security.Cryptography.SHA512.Create();

@@ -14,5 +14,10 @@ namespace BLL
             AdminDBSeed seeder = new AdminDBSeed();
             seeder.SeedAdminDB();
         }
+
+        public static byte[] GeneratePasswordHash(string Password)
+        {
+            return AdminDAL.GeneratePasswordHash(Password);
+        }
     }
 }
