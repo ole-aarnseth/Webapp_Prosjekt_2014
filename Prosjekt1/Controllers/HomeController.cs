@@ -10,6 +10,7 @@
  * 
 */
 
+using BLL;
 using Prosjekt1.Models;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,26 @@ namespace Prosjekt1.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult MainMenu()
+        {
+            AdminBLL bll = new AdminBLL();
+            var admin = bll.GetSignedInAdmin(this.HttpContext);
+
+            if (admin != null)
+            {
+                ViewData["AdminIsSignedIn"] = true;
+                ViewData["AdminEmail"] = admin.Email;
+            }
+
+            else
+            {
+                ViewData["AdminIsSignedIn"] = false;
+            }
+
+            return PartialView("MainMenu");
         }
     }
 }

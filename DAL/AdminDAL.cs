@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,23 @@ namespace DAL
             byte[] input = System.Text.Encoding.ASCII.GetBytes(Password);
 
             return algorithm.ComputeHash(input);
+        }
+
+        public Admin GetAdmin(string Email, string Password)
+        {
+            using (AdminDB adminDB = new AdminDB())
+            {
+                byte[] passwordhash = GeneratePasswordHash(Password);
+                return adminDB.Admins.Where(a => a.Email == Email && a.LoginPassword == passwordhash).SingleOrDefault();
+            }
+        }
+
+        public Admin GetAdmin(int AdminId)
+        {
+            using (AdminDB adminDB = new AdminDB())
+            {
+                return adminDB.Admins.Where(a => a.AdminId == AdminId).SingleOrDefault();
+            }
         }
     }
 }
