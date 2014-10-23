@@ -1,0 +1,51 @@
+﻿@model Prosjekt1.Models.SignInCredentials
+
+@{
+    ViewBag.Title = "Admin Sign In";
+}
+
+<h2>Admin Sign In</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="Email" class="control-label col-md-2">Admin Email:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email", @maxlength = "40" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="LoginPassword" class="control-label col-md-2">Admin Password:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LoginPassword, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                @Html.ValidationMessageFor(model => model.LoginPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sign In" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <p>@ViewBag.SignInFailed</p>
+        </div>
+    </div>
+}
+
+<a href="@Url.Action("Index", "Store")" class="btn btn-primary">Back</a>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
