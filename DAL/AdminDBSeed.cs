@@ -20,7 +20,7 @@ namespace DAL
                     return;
                 }
 
-                var defaultAdmin = new Admin
+                var defaultAdmin = new Admin()
                 {
                     Email = "admin@admin.com",
                     LoginPassword = AdminDAL.GeneratePasswordHash("admin1234"),
