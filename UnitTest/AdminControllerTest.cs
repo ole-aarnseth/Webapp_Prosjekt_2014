@@ -12,9 +12,22 @@ using System.Web.Mvc;
 
 namespace UnitTest
 {
+    /*
+     * About AssertFailedException:
+     * If an Assert fails, the AssertFailException is caught in the following catch-statement, which passes
+     * the Exception details to TestLogWriter, and then throws the exception so Visual Studio will see it.
+     */
+
     [TestClass]
     public class AdminControllerTest
     {
+        private TestLogWriter LogWriter;
+
+        public AdminControllerTest()
+        {
+            LogWriter = new TestLogWriter();
+        }
+
         [TestMethod]
         public void SignIn()
         {
@@ -25,7 +38,16 @@ namespace UnitTest
             var Result = (ViewResult) Controller.SignIn();
 
             // Assert
-            Assert.AreEqual(Result.ViewName, "");
+            try
+            {
+                Assert.AreEqual(Result.ViewName, "");
+            }
+
+            catch (AssertFailedException Exception)
+            {
+                LogWriter.WriteToLogFile(Exception.ToString());
+                throw Exception;
+            }
         }
 
         [TestMethod]
@@ -45,10 +67,19 @@ namespace UnitTest
             var Result = (RedirectToRouteResult) Controller.SignIn(creds);
 
             // Assert
-            Assert.AreEqual(Result.RouteName, "");
-            Assert.AreEqual(Result.RouteValues.Count, 2);
-            Assert.AreEqual(Result.RouteValues.Values.First(), "Index");
-            Assert.AreEqual(Result.RouteValues.Values.Last(), "Store");
+            try
+            {
+                Assert.AreEqual(Result.RouteName, "");
+                Assert.IsTrue(Result.RouteValues.Count == 2);
+                Assert.AreEqual(Result.RouteValues.Values.First(), "Index");
+                Assert.AreEqual(Result.RouteValues.Values.Last(), "Store");
+            }
+
+            catch (AssertFailedException Exception)
+            {
+                LogWriter.WriteToLogFile(Exception.ToString());
+                throw Exception;
+            }
         }
 
         [TestMethod]
@@ -68,8 +99,17 @@ namespace UnitTest
             var Result = (ViewResult) Controller.SignIn(creds);
 
             // Assert
-            Assert.IsTrue(Result.ViewData.ModelState.Count == 1);
-            Assert.AreEqual(Result.ViewName, "");
+            try
+            {
+                Assert.IsTrue(Result.ViewData.ModelState.Count == 1);
+                Assert.AreEqual(Result.ViewName, "");
+            }
+
+            catch (AssertFailedException Exception)
+            {
+                LogWriter.WriteToLogFile(Exception.ToString());
+                throw Exception;
+            }
         }
 
         [TestMethod]
@@ -89,8 +129,17 @@ namespace UnitTest
             var Result = (ViewResult) Controller.SignIn(creds);
 
             // Assert
-            Assert.AreEqual(Result.ViewName, "");
-            Assert.AreEqual(Result.ViewBag.SignInFailed, "Invalid email or password");
+            try
+            {
+                Assert.AreEqual(Result.ViewName, "");
+                Assert.AreEqual(Result.ViewBag.SignInFailed, "Invalid email or password");
+            }
+
+            catch (AssertFailedException Exception)
+            {
+                LogWriter.WriteToLogFile(Exception.ToString());
+                throw Exception;
+            }
         }
     }
 }
