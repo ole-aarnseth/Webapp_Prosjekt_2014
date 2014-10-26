@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class AdminDAL
+    public class AdminDAL : DAL.IAdminDAL
     {
         // Because DAL has no access to the original hash function in Prosjekt1/Models/DBCustomer, it needs its own implementation.
         public static byte[] GeneratePasswordHash(string Password)

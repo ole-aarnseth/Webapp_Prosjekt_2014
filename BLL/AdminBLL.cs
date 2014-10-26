@@ -11,25 +11,36 @@ namespace BLL
 {
     public class AdminBLL
     {
+        private IAdminDAL DAL;
+
+        public AdminBLL()
+        {
+            DAL = new AdminDAL();
+        }
+
+        public AdminBLL(IAdminDAL stub)
+        {
+            DAL = stub;
+        }
+
         public void SeedAdminDB()
         {
             AdminDBSeed seeder = new AdminDBSeed();
             seeder.SeedAdminDB();
         }
 
-        public static byte[] GeneratePasswordHash(string Password)
-        {
-            return AdminDAL.GeneratePasswordHash(Password);
-        }
-
         public bool SignIn(HttpContextBase Context, string Email, string Password)
         {
-            AdminDAL dal = new AdminDAL();
-            var admin = dal.GetAdmin(Email, Password);
+            var admin = DAL.GetAdmin(Email, Password);
 
             if (admin != null)
             {
-                Context.Session[Constants.AdminSignedInSessionKey] = admin.AdminId.ToString();
+                // If UnitTest is running, Context will be null
+                if (Context != null)
+                {
+                    Context.Session[Constants.AdminSignedInSessionKey] = admin.AdminId.ToString();
+                }
+
                 return true;
             }
 
@@ -41,18 +52,16 @@ namespace BLL
 
         public Admin GetAdmin(int AdminId)
         {
-            AdminDAL dal = new AdminDAL();
-            return dal.GetAdmin(AdminId);
+            return DAL.GetAdmin(AdminId);
         }
 
         public Admin GetSignedInAdmin(HttpContextBase Context)
         {
             if (Context.Session[Constants.AdminSignedInSessionKey] != null)
             {
-                AdminDAL dal = new AdminDAL();
                 int AdminId = Convert.ToInt32(Context.Session[Constants.AdminSignedInSessionKey]);
 
-                return dal.GetAdmin(AdminId);
+                return DAL.GetAdmin(AdminId);
             }
 
             else

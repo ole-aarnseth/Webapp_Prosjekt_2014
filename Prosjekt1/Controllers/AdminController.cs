@@ -10,6 +10,18 @@ namespace Prosjekt1.Controllers
 {
     public class AdminController : Controller
     {
+        private AdminBLL BLL;
+
+        public AdminController()
+        {
+            BLL = new AdminBLL();
+        }
+
+        public AdminController(AdminBLL TestBLL)
+        {
+            BLL = TestBLL;
+        }
+
         public ActionResult SignIn()
         {
             return View();
@@ -20,9 +32,7 @@ namespace Prosjekt1.Controllers
         {
             if (ModelState.IsValid)
             {
-                AdminBLL bll = new AdminBLL();
-
-                if (bll.SignIn(this.HttpContext, creds.Email, creds.LoginPassword))
+                if (BLL.SignIn(this.HttpContext, creds.Email, creds.LoginPassword))
                 {
                     return RedirectToAction("Index", "Store");
                 }
