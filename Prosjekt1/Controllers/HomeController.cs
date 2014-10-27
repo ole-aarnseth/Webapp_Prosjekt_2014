@@ -22,6 +22,18 @@ namespace Prosjekt1.Controllers
 {
     public class HomeController : Controller
     {
+        private AdminBLL BLL;
+
+        public HomeController()
+        {
+            BLL = new AdminBLL();
+        }
+
+        public HomeController(AdminBLL ABLL)
+        {
+            BLL = ABLL;
+        }
+
         // GET: Home
         public ActionResult Index()
         {
@@ -31,8 +43,7 @@ namespace Prosjekt1.Controllers
         [ChildActionOnly]
         public ActionResult MainMenu()
         {
-            AdminBLL bll = new AdminBLL();
-            var admin = bll.GetSignedInAdmin(this.HttpContext);
+            var admin = BLL.GetSignedInAdmin(this.HttpContext);
 
             if (admin != null)
             {
