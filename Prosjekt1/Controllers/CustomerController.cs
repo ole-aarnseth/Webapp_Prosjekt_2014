@@ -279,5 +279,30 @@ namespace Prosjekt1.Controllers
             ViewBag.DuplicateEmail = "Another customer ";
             return View();
         }
+        Customer getOnecustomer(int id);
+        public Customer getOneCustomer(int id)
+        {
+            return getOnecustomer(id);
+        }
+        bool deletecustomer(int id);
+        public bool deleteCustomer(int id)
+        {
+            return deletecustomer(id);
+        }
+        public ActionResult DeleteCustomer(int id)
+        {
+            Customer A_Customer =getOneCustomer(id);
+            return View(A_Customer);
+        }
+        public ActionResult DeleteCustomer(int id, Customer deletecustomer)
+        {
+            bool deleteOK = deleteCustomer(id);
+            if(deleteOK)
+            {
+                return RedirectToAction("List");
+            }
+            return View();
+        }
     }
+  
 }
