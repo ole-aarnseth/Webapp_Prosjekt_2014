@@ -153,7 +153,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\BookDetails.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Store\AuthorMenu.cshtml" />
     <Content Include="Views\Store\BrowseAuthor.cshtml" />
     <Content Include="Views\Store\GenreMenu.cshtml" />
@@ -171,7 +170,9 @@
     <Content Include="Views\Order\ListOrders.cshtml" />
     <Content Include="Views\Order\OrderDetails.cshtml" />
     <Content Include="Views\Admin\SignIn.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\MainMenu.cshtml" />
+    <Content Include="Views\Admin\SignOut.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

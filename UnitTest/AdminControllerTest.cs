@@ -92,5 +92,19 @@ namespace UnitTest
             Assert.AreEqual(Result.ViewName, "");
             Assert.AreEqual(Result.ViewBag.SignInFailed, "Invalid email or password");
         }
+
+        [TestMethod]
+        public void SignOut()
+        {
+            // Arrange
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()));
+
+            // Act
+            var Result = (ViewResult)Controller.SignOut();
+
+            // Assert
+            Assert.AreEqual(Result.ViewName, "");
+            Assert.AreEqual(Result.ViewBag.SignedOutEmail, "admin@admin.com");
+        }
     }
 }

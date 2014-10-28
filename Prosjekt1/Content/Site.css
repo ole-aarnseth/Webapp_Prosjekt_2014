@@ -102,3 +102,7 @@ h4.addresshdr {
     clear: both;
   }
 }
+
+.adminmenu {
+    background: linear-gradient(darkblue, blue);
+}
