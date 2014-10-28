@@ -279,29 +279,97 @@ namespace Prosjekt1.Controllers
             ViewBag.DuplicateEmail = "Another customer ";
             return View();
         }
-        Customer getOnecustomer(int id);
-        public Customer getOneCustomer(int id)
+        public Customer getOnecustomer(string email)
         {
-            return getOnecustomer(id);
+            var db = new BookStoreDB();
+            var OnedbCustomer = db.Customers.FirstOrDefault(c => c.Email == email);
+            if(OnedbCustomer == null)
+            {
+                return null;
+            }
+            else
+            {
+                var outputCustomer = new Customer()
+                {
+                    Email = OnedbCustomer.Email,
+                    FirstName = OnedbCustomer.FirstName,
+                    LastName = OnedbCustomer.LastName,
+                    Phone = OnedbCustomer.Phone,
+                    Address = OnedbCustomer.Address,
+                    PostalCode = OnedbCustomer.PostalCode,
+                    City = OnedbCustomer.City
+                };
+                return outputCustomer;
+            }
         }
-        bool deletecustomer(int id);
-        public bool deleteCustomer(int id)
+        public Customer getOneCustomer(string email)
         {
-            return deletecustomer(id);
+            return getOnecustomer(email);
         }
-        public ActionResult DeleteCustomer(int id)
+        public bool deletecustomer(String email)
         {
-            Customer A_Customer =getOneCustomer(id);
+            var db = new BookStoreDB();
+            try
+            {
+                DBCustomer deleteCustomer = db.Customers.FirstOrDefault(c => c.Email == email);
+                if(deleteCustomer == null)
+                {
+                    return false;
+                }
+                db.Customers.Remove(deleteCustomer);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception error)
+            {
+                return false;
+            }
+        }
+        public bool deleteCustomer(String email)
+        {
+            return deletecustomer(email);
+        }
+        public ActionResult DeleteCustomer(String email)
+        {
+            Customer A_Customer = getOneCustomer(email);
             return View(A_Customer);
         }
-        public ActionResult DeleteCustomer(int id, Customer deletecustomer)
+        public ActionResult DeleteCustomer(string email, Customer deletecustomer)
         {
-            bool deleteOK = deleteCustomer(id);
+            bool deleteOK = deleteCustomer(email);
             if(deleteOK)
             {
                 return RedirectToAction("List");
             }
             return View();
+        }
+
+        //lister ut alle kunder.
+        public List<Customer> getAllCustomer()
+        {
+            List<Customer> allCustomers = getAllCustomers();
+            return allCustomers;
+        }
+        public ActionResult list()
+        {
+            List<Customer> allCustomers = getAllCustomer();
+            return View(allCustomers);
+        }
+        public List<Customer> getAllCustomers()
+        {
+            var db = new BookStoreDB();
+            List<Customer> allCustomers = db.Customers.Select(c=> new Customer()
+            {
+                Email = c.Email,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Phone = c.Phone,
+                Address = c.Address,
+                PostalCode = c.PostalCode,
+                City = c.City
+            }
+            ).ToList();
+            return allCustomers;
         }
     }
   
