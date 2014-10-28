@@ -75,5 +75,19 @@ namespace BLL
                 return null;
             }
         }
+
+        public string SignOut(HttpContextBase Context)
+        {
+            // HttpContext is null during unit testing
+            if (Context == null)
+            {
+                return DAL.GetAdmin(1).Email;
+            }
+
+            int AdminId = Convert.ToInt32(Context.Session[Constants.AdminSignedInSessionKey]);
+            Context.Session[Constants.AdminSignedInSessionKey] = null;
+
+            return DAL.GetAdmin(AdminId).Email;
+        }
     }
 }

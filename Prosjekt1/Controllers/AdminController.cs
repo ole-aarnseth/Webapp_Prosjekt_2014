@@ -45,5 +45,13 @@ namespace Prosjekt1.Controllers
 
             return View();
         }
+
+        public ActionResult SignOut()
+        {
+            string Email = BLL.SignOut(this.HttpContext);
+            ViewBag.SignedOutEmail = Email;
+
+            return View();
+        }
     }
 }
