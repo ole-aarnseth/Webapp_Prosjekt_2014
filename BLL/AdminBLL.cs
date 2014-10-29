@@ -11,14 +11,14 @@ namespace BLL
 {
     public class AdminBLL
     {
-        private IAdminDAL DAL;
+        private AdminDALInterface DAL;
 
         public AdminBLL()
         {
             DAL = new AdminDAL();
         }
 
-        public AdminBLL(IAdminDAL stub)
+        public AdminBLL(AdminDALInterface stub)
         {
             DAL = stub;
         }

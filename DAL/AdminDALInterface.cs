@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public interface IAdminDAL
+    public interface AdminDALInterface
     {
         Admin GetAdmin(string Email, string Password);
         Admin GetAdmin(int AdminId);
