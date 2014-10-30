@@ -19,6 +19,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using BLL;
 
 namespace Prosjekt1.Controllers
 {
@@ -30,6 +31,20 @@ namespace Prosjekt1.Controllers
             using (var bookDB = new BookStoreDB())
             {
                 var books = bookDB.Books.Include(b => b.Author).ToList();
+
+                // Check if admin is signed in
+                var admin = new AdminBLL().GetSignedInAdmin(this.HttpContext);
+
+                if (admin != null)
+                {
+                    ViewData["AdminIsSignedIn"] = true;
+                }
+
+                else
+                {
+                    ViewData["AdminIsSignedIn"] = false;
+                }
+
                 return View(books);
             }
         }
@@ -71,6 +86,20 @@ namespace Prosjekt1.Controllers
                 }
 
                 var book = bookDB.Books.Find(bookId);
+
+                // Check if admin is signed in
+                var admin = new AdminBLL().GetSignedInAdmin(this.HttpContext);
+
+                if (admin != null)
+                {
+                    ViewData["AdminIsSignedIn"] = true;
+                }
+
+                else
+                {
+                    ViewData["AdminIsSignedIn"] = false;
+                }
+
                 return View(book);
             }
         }

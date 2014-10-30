@@ -1,5 +1,6 @@
 ﻿using BLL;
 using Prosjekt1.Models;
+using Prosjekt1.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,18 @@ namespace Prosjekt1.Controllers
     public class AdminController : Controller
     {
         private AdminBLL BLL;
+        private BookRepositoryInterface BookRepo;
 
         public AdminController()
         {
             BLL = new AdminBLL();
+            BookRepo = new BookRepository();
         }
 
-        public AdminController(AdminBLL TestBLL)
+        public AdminController(AdminBLL TestBLL, BookRepositoryInterface BookRepoStub)
         {
             BLL = TestBLL;
+            BookRepo = BookRepoStub;
         }
 
         public ActionResult SignIn()
@@ -52,6 +56,21 @@ namespace Prosjekt1.Controllers
             ViewBag.SignedOutEmail = Email;
 
             return View();
+        }
+
+        public ActionResult AdminDetails()
+        {
+            var SignedInAdmin = BLL.GetSignedInAdmin(this.HttpContext);
+
+            return View(SignedInAdmin);
+        }
+
+        public ActionResult EditBook(int BookId)
+        {
+            var Book = BookRepo.GetBook(BookId);
+            ViewBag.AuthorId = BookRepo.AuthorList(Book);
+
+            return View(Book);
         }
     }
 }

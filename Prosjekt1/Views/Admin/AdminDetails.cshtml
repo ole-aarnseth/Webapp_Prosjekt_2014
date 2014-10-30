@@ -1,0 +1,39 @@
+﻿@model Model.Admin
+
+@{
+    ViewBag.Title = "Admin Details";
+}
+
+<h2>Admin Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label for="Email" class="control-label">Email:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            <label for="FullName" class="control-label">Full Name:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            <label for="Phone" class="control-label">Phone Number:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+    </dl>
+</div>
+<br />
+<a href="@Url.Action("Index", "Store")" class="btn btn-primary">Back to store index</a>

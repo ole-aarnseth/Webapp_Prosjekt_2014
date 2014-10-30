@@ -40,7 +40,10 @@
     </dl>
 </div>
 
+@if (!(bool)ViewData["AdminIsSignedIn"])
+{
     <a href="@Url.Action("AddToCart", "Cart", new { bookId = Model.BookId })" class="btn btn-success cartbtn">Add to cart</a>
+}
     <br />
 
     @if (ViewBag.FromContext == @DetailsFromContext.FromBrowseAuthor)

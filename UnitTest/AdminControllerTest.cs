@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Prosjekt1.Repositories;
 
 namespace UnitTest
 {
@@ -19,7 +20,7 @@ namespace UnitTest
         public void SignIn()
         {
             // Arrange
-            var Controller = new AdminController(new AdminBLL(new AdminDALStub()));
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
 
             // Act
             var Result = (ViewResult) Controller.SignIn();
@@ -32,7 +33,7 @@ namespace UnitTest
         public void SignInPostSuccessfulSignIn()
         {
             // Arrange
-            var Controller = new AdminController(new AdminBLL(new AdminDALStub()));
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
 
             // These are the credentials for the defaultadmin in Stub
             SignInCredentials creds = new SignInCredentials()
@@ -55,7 +56,7 @@ namespace UnitTest
         public void SignInPostModelStateNotValid()
         {
             // Arrange
-            var Controller = new AdminController(new AdminBLL(new AdminDALStub()));
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
             Controller.ViewData.ModelState.AddModelError("Email", "Email is required");
 
             SignInCredentials creds = new SignInCredentials()
@@ -76,7 +77,7 @@ namespace UnitTest
         public void SignInPostBadCredentials()
         {
             // Arrange
-            var Controller = new AdminController(new AdminBLL(new AdminDALStub()));
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
 
             // AdminDALStub will only accept defaultadmin "admin@admin.com" with password "admin1234"
             SignInCredentials creds = new SignInCredentials()
@@ -97,14 +98,27 @@ namespace UnitTest
         public void SignOut()
         {
             // Arrange
-            var Controller = new AdminController(new AdminBLL(new AdminDALStub()));
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
 
             // Act
-            var Result = (ViewResult)Controller.SignOut();
+            var Result = (ViewResult) Controller.SignOut();
 
             // Assert
             Assert.AreEqual(Result.ViewName, "");
             Assert.AreEqual(Result.ViewBag.SignedOutEmail, "admin@admin.com");
+        }
+
+        [TestMethod]
+        public void AdminDetails()
+        {
+            // Arrange
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
+
+            // Act
+            var Result = (ViewResult) Controller.AdminDetails();
+
+            // Assert
+            Assert.AreEqual(Result.ViewName, "");
         }
     }
 }
