@@ -106,5 +106,20 @@ namespace Prosjekt1.Controllers
 
             return View();
         }
+
+        public ActionResult DeleteBook(int BookId)
+        {
+            bool DeleteOK = BookRepo.DeleteBook(BookId);
+
+            if (DeleteOK)
+            {
+                return RedirectToAction("Index", "Store");
+            }
+
+            else
+            {
+                return View();
+            }
+        }
     }
 }

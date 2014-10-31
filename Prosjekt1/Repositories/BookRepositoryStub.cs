@@ -43,5 +43,10 @@ namespace Prosjekt1.Repositories
         {
             return null;
         }
+
+        public bool DeleteBook(int BookId)
+        {
+            return BookId == 1;
+        }
     }
 }

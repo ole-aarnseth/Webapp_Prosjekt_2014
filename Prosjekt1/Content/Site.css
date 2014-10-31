@@ -106,3 +106,7 @@ h4.addresshdr {
 .adminmenu {
     background: linear-gradient(darkblue, blue);
 }
+
+a.delbtn {
+    margin-left: 3em;
+}

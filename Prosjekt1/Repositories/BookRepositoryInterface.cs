@@ -15,5 +15,6 @@ namespace Prosjekt1.Repositories
         bool EditBook(BookViewModel Book);
         List<SelectListItem> AuthorList(Book Book);
         List<SelectListItem> GenreList(Book Book);
+        bool DeleteBook(int BookId);
     }
 }

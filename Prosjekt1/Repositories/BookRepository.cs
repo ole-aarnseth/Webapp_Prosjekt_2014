@@ -82,5 +82,39 @@ namespace Prosjekt1.Repositories
                 return GenreList;
             }
         }
+
+        public bool DeleteBook(int BookId)
+        {
+            BookStoreDB bookDB = new BookStoreDB();
+
+            try
+            {
+                var Book = bookDB.Books.Where(b => b.BookId == BookId).SingleOrDefault();
+                var Genre = bookDB.Genres.Include("Books").Where(g => g.GenreId == Book.GenreId).SingleOrDefault();
+                var Author = bookDB.Authors.Include("Books").Where(a => a.AuthorId == Book.AuthorId).SingleOrDefault();
+
+                bookDB.Books.Remove(Book);
+
+                if (Genre.Books.Count == 1)
+                {
+                    bookDB.Genres.Remove(Genre);
+                }
+
+                if (Author.Books.Count == 1)
+                {
+                    bookDB.Authors.Remove(Author);
+                }
+
+                bookDB.SaveChanges();
+            }
+
+            catch (Exception exc)
+            {
+                ErrorLogBLL.WriteToErrorLogFile(exc.ToString());
+                return false;
+            }
+
+            return true;
+        }
     }
 }

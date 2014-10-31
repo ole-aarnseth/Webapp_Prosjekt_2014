@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Prosjekt1.Repositories;
+using Prosjekt1.ViewModels;
 
 namespace UnitTest
 {
@@ -116,6 +117,105 @@ namespace UnitTest
 
             // Act
             var Result = (ViewResult) Controller.AdminDetails();
+
+            // Assert
+            Assert.AreEqual(Result.ViewName, "");
+        }
+
+        [TestMethod]
+        public void EditBook()
+        {
+            // Arrange
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
+
+            // Act
+            var Result = (ViewResult) Controller.EditBook(1);
+
+            // Assert
+            Assert.AreEqual(Result.ViewName, "");
+        }
+
+        [TestMethod]
+        public void EditBookPostSuccessful()
+        {
+            // Arrange
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
+            var BookModel = new BookViewModel()
+            {
+                BookId = 1
+            };
+
+            // Act
+            var Result = (RedirectToRouteResult) Controller.EditBook(BookModel);
+
+            // Assert
+            Assert.AreEqual(Result.RouteName, "");
+            Assert.IsTrue(Result.RouteValues.Count == 2);
+            Assert.AreEqual(Result.RouteValues.Values.First(), "Index");
+            Assert.AreEqual(Result.RouteValues.Values.Last(), "Store");
+        }
+
+        [TestMethod]
+        public void EditBookPostModelStateNotValid()
+        {
+            // Arrange
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
+            Controller.ViewData.ModelState.AddModelError("Email", "Email is required");
+            var BookModel = new BookViewModel()
+            {
+                BookId = 1
+            };
+
+            // Act
+            var Result = (ViewResult) Controller.EditBook(BookModel);
+
+            // Assert
+            Assert.AreEqual(Result.ViewName, "");
+            Assert.IsTrue(Result.ViewData.ModelState.Count == 1);
+        }
+
+        [TestMethod]
+        public void EditBookPostDBError()
+        {
+            // Arrange
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
+            var BookModel = new BookViewModel()
+            {
+                BookId = 0
+            };
+
+            // Act
+            var Result = (ViewResult) Controller.EditBook(BookModel);
+
+            // Assert
+            Assert.AreEqual(Result.ViewName, "");
+            Assert.AreEqual(Result.ViewBag.DBError, "Something went wrong when editing database.");
+        }
+
+        [TestMethod]
+        public void DeleteBookSuccessful()
+        {
+            // Arrange
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
+
+            // Act
+            var Result = (RedirectToRouteResult) Controller.DeleteBook(1);
+
+            // Assert
+            Assert.AreEqual(Result.RouteName, "");
+            Assert.IsTrue(Result.RouteValues.Count == 2);
+            Assert.AreEqual(Result.RouteValues.Values.First(), "Index");
+            Assert.AreEqual(Result.RouteValues.Values.Last(), "Store");
+        }
+
+        [TestMethod]
+        public void DeleteBookDBError()
+        {
+            // Arrange
+            var Controller = new AdminController(new AdminBLL(new AdminDALStub()), new BookRepositoryStub());
+
+            // Act
+            var Result = (ViewResult) Controller.DeleteBook(0);
 
             // Assert
             Assert.AreEqual(Result.ViewName, "");

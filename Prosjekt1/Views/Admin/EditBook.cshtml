@@ -58,12 +58,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" /><a href="@Url.Action("DeleteBook", new { BookId = Model.BookId})" class="btn btn-danger delbtn">Delete book</a>
             </div>
         </div>
         <p>@ViewBag.DBError</p>
     </div>
 }
+
 
 <a href="@Url.Action("Index", "Store")" class="btn btn-primary">Back to book index</a>
 
