@@ -1,6 +1,7 @@
 ﻿using BLL;
 using Prosjekt1.Models;
 using Prosjekt1.Repositories;
+using Prosjekt1.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,9 +69,42 @@ namespace Prosjekt1.Controllers
         public ActionResult EditBook(int BookId)
         {
             var Book = BookRepo.GetBook(BookId);
-            ViewBag.AuthorId = BookRepo.AuthorList(Book);
 
-            return View(Book);
+            var BookView = new BookViewModel()
+            {
+                BookId = Book.BookId,
+                Title = Book.Title,
+                Description = Book.Description,
+                BookImageURL = Book.BookImageURL,
+                Price = Book.Price,
+                AuthorId = Book.AuthorId,
+                AuthorList = BookRepo.AuthorList(Book),
+                GenreId = Book.GenreId,
+                GenreList = BookRepo.GenreList(Book)
+            };
+
+            return View(BookView);
+        }
+
+        [HttpPost]
+        public ActionResult EditBook(BookViewModel BookModel)
+        {
+            if (ModelState.IsValid)
+            {
+                bool EditOK = BookRepo.EditBook(BookModel);
+
+                if (EditOK)
+                {
+                    return RedirectToAction("Index", "Store");
+                }
+
+                else
+                {
+                    ViewBag.DBError = "Something went wrong when editing database.";
+                }
+            }
+
+            return View();
         }
     }
 }

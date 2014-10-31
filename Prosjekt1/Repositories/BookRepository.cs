@@ -1,5 +1,6 @@
 ﻿using BLL;
 using Prosjekt1.Models;
+using Prosjekt1.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,30 +13,23 @@ namespace Prosjekt1.Repositories
     {
         public Book GetBook(int BookId)
         {
-            using (BookStoreDB bookDB = new BookStoreDB())
-            {
-                return bookDB.Books.Include("Author").Include("Genre").Where(b => b.BookId == BookId).SingleOrDefault();
-            }
+            BookStoreDB bookDB = new BookStoreDB();
+            return bookDB.Books.Where(b => b.BookId == BookId).SingleOrDefault();
         }
 
-        public bool EditBook(Book Book)
+        public bool EditBook(BookViewModel Book)
         {
             BookStoreDB bookDB = new BookStoreDB();
 
             try
             {
-                var BookEdit = GetBook(Book.BookId);
+                var BookEdit = bookDB.Books.Where(b => b.BookId == Book.BookId).SingleOrDefault();
 
-                BookEdit = new Book()
-                {
-                    BookId = Book.BookId,
-                    Title = Book.Title,
-                    Description = Book.Description,
-                    BookImageURL = Book.BookImageURL,
-                    Price = Book.Price,
-                    AuthorId = Book.AuthorId,
-                    GenreId = Book.GenreId
-                };
+                BookEdit.Title = Book.Title;
+                BookEdit.Description = Book.Description;
+                BookEdit.Price = Book.Price;
+                BookEdit.AuthorId = Book.AuthorId;
+                BookEdit.GenreId = Book.GenreId;
 
                 bookDB.SaveChanges();
             }
@@ -49,19 +43,43 @@ namespace Prosjekt1.Repositories
             return true;
         }
 
-        public SelectList AuthorList(Book Book)
+        public List<SelectListItem> AuthorList(Book Book)
         {
             using (BookStoreDB bookDB = new BookStoreDB())
             {
-                return new SelectList(bookDB.Authors, "AuthorId", "Name", Book.AuthorId);
+                List<Author> DBAuthors = bookDB.Authors.ToList();
+                List<SelectListItem> AuthorList = new List<SelectListItem>();
+
+                foreach (var Author in DBAuthors)
+                {
+                    AuthorList.Add(new SelectListItem()
+                    {
+                        Text = Author.FirstName + " " + Author.LastName,
+                        Value = Author.AuthorId.ToString()
+                    });
+                }
+
+                return AuthorList;
             }
         }
 
-        public SelectList GenreList(Book Book)
+        public List<SelectListItem> GenreList(Book Book)
         {
             using (BookStoreDB bookDB = new BookStoreDB())
             {
-                return new SelectList(bookDB.Genres, "GenreId", "Name", Book.GenreId);
+                List<Genre> DBGenres = bookDB.Genres.ToList();
+                List<SelectListItem> GenreList = new List<SelectListItem>();
+
+                foreach (var Genre in DBGenres)
+                {
+                    GenreList.Add(new SelectListItem()
+                    {
+                        Text = Genre.Name,
+                        Value = Genre.GenreId.ToString()
+                    });
+                }
+
+                return GenreList;
             }
         }
     }

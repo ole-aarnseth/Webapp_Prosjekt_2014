@@ -1,4 +1,5 @@
 ﻿using Prosjekt1.Models;
+using Prosjekt1.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Prosjekt1.Repositories
             };
         }
 
-        public bool EditBook(Book Book)
+        public bool EditBook(BookViewModel Book)
         {
             if (Book.BookId == 0)
             {
@@ -33,12 +34,12 @@ namespace Prosjekt1.Repositories
             return true;
         }
 
-        public SelectList AuthorList(Book Book)
+        public List<SelectListItem> AuthorList(Book Book)
         {
             return null;
         }
 
-        public SelectList GenreList(Book Book)
+        public List<SelectListItem> GenreList(Book Book)
         {
             return null;
         }

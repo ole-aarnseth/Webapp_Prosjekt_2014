@@ -19,6 +19,9 @@ namespace Prosjekt1
             AdminBLL AdminBLL = new AdminBLL();
             AdminBLL.SeedAdminDB();
 
+            // Add bug workaround
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
