@@ -120,6 +120,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Repositories\CustomerRepositoryStub.cs" />
     <Compile Include="ViewModels\BookViewModel.cs" />
+    <Compile Include="ViewModels\EmailedFAQQuestionViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +186,10 @@
     <Content Include="Views\Admin\AdminDetails.cshtml" />
     <Content Include="Views\Admin\EditBook.cshtml" />
     <Content Include="Views\Admin\DeleteBook.cshtml" />
+    <Content Include="Views\FAQ\Index.cshtml" />
+    <Content Include="Views\FAQ\SendFAQQuestion.cshtml" />
+    <Content Include="Views\FAQ\EmailedFAQAdded.cshtml" />
+    <Content Include="Views\FAQ\ViewEmailedFAQQustions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

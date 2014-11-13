@@ -50,9 +50,10 @@
   <ItemGroup>
     <Compile Include="AdminDAL.cs" />
     <Compile Include="AdminDALStub.cs" />
-    <Compile Include="AdminDB.cs" />
-    <Compile Include="AdminDBSeed.cs" />
+    <Compile Include="DBContext.cs" />
+    <Compile Include="DBSeed.cs" />
     <Compile Include="AdminDALInterface.cs" />
+    <Compile Include="FAQDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ErrorLogWriter.cs" />
   </ItemGroup>

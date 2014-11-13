@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Model.EmailedFAQQuestion>
+
+@{
+    ViewBag.Title = "Questions sent in";
+}
+
+<h1>Questions sent in</h1>
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Sender email:
+        </th>
+        <th>
+            Question:
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactEmail)
+        </td>
+        <td>
+            <p class="emailed-question">
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </p>
+        </td>
+    </tr>
+}
+
+</table>
+
+<hr />
+<br />
+<a href="@Url.Action("Index")" class="btn btn-success"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back to FAQ</a>

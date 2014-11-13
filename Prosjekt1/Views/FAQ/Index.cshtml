@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Model.FAQQuestion>
+
+@{
+    ViewBag.Title = "Frequently Asked Questions";
+}
+
+<h1>Frequently Asked Questions</h1>
+<hr />
+<br />
+@using (Html.BeginForm())
+{
+    <label for="CategoryDropDown" class="faq-category-select-label">Select category:</label>
+    @Html.DropDownList("CategoryDropDown", (IEnumerable<SelectListItem>) ViewData["CategorySelect"], "--- Category ---", new { @onchange = "this.form.submit();" })
+}
+<br />
+<br />
+<p class="faq-text">Click on the question to view the answer:</p>
+
+@foreach (var question in Model)
+{
+    <div class="question dropdown">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"><h4>Q: @question.QuestionText <b class="caret"></b></h4></a>
+        <div class="dropdown-menu answer">
+            <h4 class="answer-text">A: @question.Answer</h4>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+}
+
+<p class="faq-text">Not finding the answer you're looking for? Send us your question @Html.ActionLink("here", "SendFAQQuestion").</p>
+<p class="faq-text">View all questions previously sent in @Html.ActionLink("here", "ViewEmailedFAQQustions").</p>
+
+<a href="@Url.Action("Index", "Store")" class="btn btn-success"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back to store</a>

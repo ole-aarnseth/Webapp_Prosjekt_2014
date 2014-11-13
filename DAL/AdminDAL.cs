@@ -20,7 +20,7 @@ namespace DAL
 
         public Admin GetAdmin(string Email, string Password)
         {
-            using (AdminDB adminDB = new AdminDB())
+            using (DBContext adminDB = new DBContext())
             {
                 byte[] passwordhash = GeneratePasswordHash(Password);
                 return adminDB.Admins.Where(a => a.Email == Email && a.LoginPassword == passwordhash).SingleOrDefault();
@@ -29,7 +29,7 @@ namespace DAL
 
         public Admin GetAdmin(int AdminId)
         {
-            using (AdminDB adminDB = new AdminDB())
+            using (DBContext adminDB = new DBContext())
             {
                 return adminDB.Admins.Where(a => a.AdminId == AdminId).SingleOrDefault();
             }

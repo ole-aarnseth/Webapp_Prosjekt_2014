@@ -110,3 +110,49 @@ h4.addresshdr {
 a.delbtn {
     margin-left: 3em;
 }
+
+.answer {
+    white-space: normal;
+    width: 70em;
+    background: linear-gradient(lightgray, white);
+}
+
+h4.answer-text {
+    float: left;
+    margin-left: 0.5em;
+}
+
+label.faq-category-select-label {
+    margin-right: 0.5em;
+}
+
+p.faq-text {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+}
+
+label.email-question-label {
+    float: left;
+    margin-top: 0.5em;
+    margin-left: 13em;
+    margin-bottom: 1em;
+}
+
+textarea.email-question-questiontext {
+    float: left;
+    margin-left: 8em;
+    margin-bottom: 1em;
+    width: 20em;
+    height: 12em;
+}
+
+p.error-faq-text {
+    margin-left: 9.1em;
+}
+
+p.emailed-question {
+    max-width: 70em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+}

@@ -1,0 +1,45 @@
+﻿@model Prosjekt1.ViewModels.EmailedFAQQuestionViewModel
+
+@{
+    ViewBag.Title = "Send us your question";
+}
+
+<h2>Send us your question</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactEmail, "Your email:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ContactEmail, new { htmlAttributes = new { @class = "form-control", @type = "email", @maxlength = "40" } })
+                @Html.ValidationMessageFor(model => model.ContactEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuestionText, "Write your question here:", htmlAttributes: new { @class = "email-question-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QuestionText, new { htmlAttributes = new { @class = "email-question-questiontext", @maxlength = "230" } })
+                @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <p class="text-danger error-faq-text">@ViewBag.ErrorMessage</p>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Send question" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<br />
+<a href="@Url.Action("Index")" class="btn btn-success"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back to FAQ</a>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

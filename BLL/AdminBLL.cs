@@ -25,7 +25,7 @@ namespace BLL
 
         public void SeedAdminDB()
         {
-            AdminDBSeed seeder = new AdminDBSeed();
+            DBSeed seeder = new DBSeed();
             seeder.SeedAdminDB();
         }
 
