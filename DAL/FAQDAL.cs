@@ -78,21 +78,14 @@ namespace DAL
             {
                 try
                 {
-                    var check1 = (from q in context.EmailedFAQQuestions
-                                 where String.Compare(q.QuestionText, QuestionText, StringComparison.InvariantCultureIgnoreCase) == 0
-                                 select new
-                                 {
-                                     QuestionText = q.QuestionText
-                                 }).SingleOrDefault();
-
-                    var check2 = (from q in context.FAQQuestions
+                    var check = (from q in context.FAQQuestions
                                   where String.Compare(q.QuestionText, QuestionText, StringComparison.InvariantCultureIgnoreCase) == 0
                                   select new
                                   {
                                       QuestionText = q.QuestionText
                                   }).SingleOrDefault();
 
-                    return check1 != null || check2 != null;
+                    return check != null;
                 }
 
                 catch (Exception exc)

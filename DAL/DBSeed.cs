@@ -121,6 +121,14 @@ namespace DAL
                     }
                 }.ForEach(q => adminDB.FAQQuestions.Add(q));
 
+                var EmailedQuestion = new EmailedFAQQuestion()
+                {
+                    ContactEmail = "john.doe@email.com",
+                    QuestionText = "How can I edit my customer details and change my shipping address?"
+                };
+
+                adminDB.EmailedFAQQuestions.Add(EmailedQuestion);
+
                 adminDB.SaveChanges();
             }
         }

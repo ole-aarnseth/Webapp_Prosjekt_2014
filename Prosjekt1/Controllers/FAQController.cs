@@ -70,6 +70,7 @@ namespace Prosjekt1.Controllers
                         Value = Category.FAQCategoryId.ToString()
                     });
 
+                    // Make category selected in list
                     if (Category.FAQCategoryId == CatId)
                     {
                         CategorySelectList.Last().Selected = true;
@@ -96,7 +97,7 @@ namespace Prosjekt1.Controllers
             {
                 if (BLL.DuplicateQuestionExists(FAQQuestion.QuestionText))
                 {
-                    ViewBag.ErrorMessage = "This question has already been asked.";
+                    ViewBag.ErrorMessage = "This question has already been answered.";
                 }
 
                 else
